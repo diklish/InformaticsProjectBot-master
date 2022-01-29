@@ -2,13 +2,9 @@ package org.klishin.telegram.informatics.project.telegram;
 
 import lombok.Getter;
 import org.klishin.telegram.informatics.project.Utils;
-import org.klishin.telegram.informatics.project.telegram.commands.service.HelpCommand;
-import org.klishin.telegram.informatics.project.telegram.commands.service.StartCommand;
+import org.klishin.telegram.informatics.project.telegram.commands.service.*;
 import org.klishin.telegram.informatics.project.telegram.nonCommand.NonCommand;
 import org.klishin.telegram.informatics.project.telegram.nonCommand.model.Dictionary;
-import org.klishin.telegram.informatics.project.telegram.operations.AllWordCommand;
-import org.klishin.telegram.informatics.project.telegram.operations.EnglishWordCommand;
-import org.klishin.telegram.informatics.project.telegram.operations.RussianWordCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
@@ -58,6 +54,9 @@ public final class Bot extends TelegramLongPollingCommandBot {
 
         register(new RussianWordCommand("russianword", "Вывод всех русских"));
         logger.debug("Команда russianword создана");
+
+        register(new TestCommand("test", "Старт теста"));
+        logger.debug("Команда test создана");
 
         register(new HelpCommand("help", "Помощь"));
         logger.debug("Команда help создана");

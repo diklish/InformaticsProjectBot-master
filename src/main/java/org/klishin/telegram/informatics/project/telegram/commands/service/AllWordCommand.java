@@ -1,4 +1,4 @@
-package org.klishin.telegram.informatics.project.telegram.operations;
+package org.klishin.telegram.informatics.project.telegram.commands.service;
 
 import org.klishin.telegram.informatics.project.Utils;
 import org.klishin.telegram.informatics.project.telegram.enums.OperationEnum;
@@ -8,7 +8,7 @@ import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 
-public class AllWordCommand extends OperationCommand {
+public class AllWordCommand extends ServiceCommand {
     private Logger logger = LoggerFactory.getLogger(AllWordCommand.class);
 
     public AllWordCommand(String identifier, String description) {

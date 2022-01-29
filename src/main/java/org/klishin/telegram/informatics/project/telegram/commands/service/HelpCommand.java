@@ -1,6 +1,7 @@
 package org.klishin.telegram.informatics.project.telegram.commands.service;
 
 import org.klishin.telegram.informatics.project.Utils;
+import org.klishin.telegram.informatics.project.telegram.enums.OperationEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.meta.api.objects.Chat;
@@ -23,15 +24,8 @@ public class HelpCommand extends ServiceCommand {
 
         logger.debug(String.format("Пользователь %s. Начато выполнение команды %s", userName,
                 this.getCommandIdentifier()));
-        sendAnswer(absSender, chat.getId(), this.getCommandIdentifier(), userName,
-                "Я бот - проект Клишина Кирилла.\n" +
-                        "Бот поможет Вам выучить несколько английских слов\n" +
-                        "❗*Список команд*\n" +
-                        " /allword - Вывод всех слов с переводом;\n" +
-                        " /englishword - Вывод всех английских слов;\n" +
-                        " /russianword - Вывод всех руских слов;\n" +
-                        "/help - помощь\n\n" +
-                        "\n");
+        sendAnswer(absSender, chat.getId(), OperationEnum.HELP, this.getDescription(),
+                this.getCommandIdentifier(), userName);
         logger.debug(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
                 this.getCommandIdentifier()));
     }
