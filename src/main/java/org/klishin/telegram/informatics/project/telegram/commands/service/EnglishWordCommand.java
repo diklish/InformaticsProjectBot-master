@@ -1,4 +1,4 @@
-package org.klishin.telegram.informatics.project.telegram.operations;
+package org.klishin.telegram.informatics.project.telegram.commands.service;
 
 import org.klishin.telegram.informatics.project.Utils;
 import org.klishin.telegram.informatics.project.telegram.enums.OperationEnum;
@@ -8,10 +8,10 @@ import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 
-public class RussianWordCommand extends OperationCommand {
+public class EnglishWordCommand extends ServiceCommand {
     private Logger logger = LoggerFactory.getLogger(EnglishWordCommand.class);
 
-    public RussianWordCommand(String identifier, String description) {
+    public EnglishWordCommand(String identifier, String description) {
         super(identifier, description);
     }
 
@@ -21,7 +21,7 @@ public class RussianWordCommand extends OperationCommand {
 
         logger.debug(String.format("Пользователь %s. Начато выполнение команды %s", userName,
                 this.getCommandIdentifier()));
-        sendAnswer(absSender, chat.getId(), OperationEnum.RUSSIAN_WORD, this.getDescription(),
+        sendAnswer(absSender, chat.getId(), OperationEnum.ENGLISH_WORD, this.getDescription(),
                 this.getCommandIdentifier(), userName);
         logger.debug(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
                 this.getCommandIdentifier()));

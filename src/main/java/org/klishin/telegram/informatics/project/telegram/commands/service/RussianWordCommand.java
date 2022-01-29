@@ -8,10 +8,10 @@ import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 
-public class StartCommand extends ServiceCommand {
-    private Logger logger = LoggerFactory.getLogger(StartCommand.class);
+public class RussianWordCommand extends ServiceCommand {
+    private Logger logger = LoggerFactory.getLogger(EnglishWordCommand.class);
 
-    public StartCommand(String identifier, String description) {
+    public RussianWordCommand(String identifier, String description) {
         super(identifier, description);
     }
 
@@ -21,7 +21,7 @@ public class StartCommand extends ServiceCommand {
 
         logger.debug(String.format("Пользователь %s. Начато выполнение команды %s", userName,
                 this.getCommandIdentifier()));
-        sendAnswer(absSender, chat.getId(), OperationEnum.START, this.getDescription(),
+        sendAnswer(absSender, chat.getId(), OperationEnum.RUSSIAN_WORD, this.getDescription(),
                 this.getCommandIdentifier(), userName);
         logger.debug(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
                 this.getCommandIdentifier()));
