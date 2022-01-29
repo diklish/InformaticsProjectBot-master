@@ -25,7 +25,7 @@ abstract class OperationCommand extends BotCommand {
         SendMessage message = new SendMessage();
         message.enableMarkdown(true);
         message.setChatId(chatId.toString());
-        message.setText(createAnswer(operations, description));
+        message.setText(createAnswer(operations));
         try {
             absSender.execute(message);
         } catch (TelegramApiException e) {
@@ -34,7 +34,7 @@ abstract class OperationCommand extends BotCommand {
         }
     }
 
-    private String createAnswer(OperationEnum operations, String description) {
+    private String createAnswer(OperationEnum operations) {
         String msg="";
 
         switch (operations) {
@@ -48,7 +48,7 @@ abstract class OperationCommand extends BotCommand {
                 break;
             case RUSSIAN_WORD:
                 for (Dictionary dictionary:Bot.getDictionaries()) {
-                    msg+=dictionary.getRussian();
+                    msg+=dictionary.getRussian()+"\n";
                 }
             case TEST:
                 break;

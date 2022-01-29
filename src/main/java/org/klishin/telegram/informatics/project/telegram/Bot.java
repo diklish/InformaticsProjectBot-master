@@ -8,6 +8,7 @@ import org.klishin.telegram.informatics.project.telegram.nonCommand.NonCommand;
 import org.klishin.telegram.informatics.project.telegram.nonCommand.model.Dictionary;
 import org.klishin.telegram.informatics.project.telegram.operations.AllWordCommand;
 import org.klishin.telegram.informatics.project.telegram.operations.EnglishWordCommand;
+import org.klishin.telegram.informatics.project.telegram.operations.RussianWordCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
@@ -50,10 +51,13 @@ public final class Bot extends TelegramLongPollingCommandBot {
         logger.debug("Команда start создана");
 
         register(new AllWordCommand("allword", "Вывод всех слов с переводом"));
-        logger.debug("Команда all_word создана");
+        logger.debug("Команда allword создана");
 
         register(new EnglishWordCommand("englishword", "Вывод всех английских слов"));
-        logger.debug("Команда english_word создана");
+        logger.debug("Команда englishword создана");
+
+        register(new RussianWordCommand("russianword", "Вывод всех русских"));
+        logger.debug("Команда russianword создана");
 
         register(new HelpCommand("help", "Помощь"));
         logger.debug("Команда help создана");
@@ -76,7 +80,7 @@ public final class Bot extends TelegramLongPollingCommandBot {
                 .build());
         dictionaries.add(Dictionary.builder()
                 .english("have")
-                .russian(" иметь")
+                .russian("иметь")
                 .build());
         dictionaries.add(Dictionary.builder()
                 .english("word")
@@ -109,6 +113,10 @@ public final class Bot extends TelegramLongPollingCommandBot {
         dictionaries.add(Dictionary.builder()
                 .english("build")
                 .russian("строить")
+                .build());
+        dictionaries.add(Dictionary.builder()
+                .english("milk")
+                .russian("молоко")
                 .build());
     }
 

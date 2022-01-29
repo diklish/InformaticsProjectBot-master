@@ -29,6 +29,7 @@ public class HelpCommand extends ServiceCommand {
                         "❗*Список команд*\n" +
                         " /allword - Вывод всех слов с переводом;\n" +
                         " /englishword - Вывод всех английских слов;\n" +
+                        " /russianword - Вывод всех руских слов;\n" +
                         "/help - помощь\n\n" +
                         "\n");
         logger.debug(String.format("Пользователь %s. Завершено выполнение команды %s", userName,
