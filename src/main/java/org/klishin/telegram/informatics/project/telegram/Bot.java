@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -26,6 +27,9 @@ public final class Bot extends TelegramLongPollingCommandBot {
     private final String BOT_TOKEN;
 
     private final NonCommand nonCommand;
+
+    private int countAll = 0;
+    private int countTruAnswer = 0;
 
     /**
      * Набор слов
@@ -136,18 +140,49 @@ public final class Bot extends TelegramLongPollingCommandBot {
     @Override
     public void processNonCommandUpdate(Update update) {
         logger.debug("Начало обработки processNonCommandUpdate");
+        if (update.hasMessage()) {
+            Message msg = update.getMessage();
+            Long chatId = msg.getChatId();
+            String userName = Utils.getUserName(msg);
+            String answer = nonCommand.nonCommandExecute(chatId, userName, msg.getText());
+            setAnswer(chatId, userName, answer);
+        } else if (!update.hasMessage() && update.hasCallbackQuery()) {
+            logger.debug("Ответ принят: " + update.getCallbackQuery().getData());
+            String[] result = update.getCallbackQuery().getData().split(":::");
+            countAll++;
+            if (result[0].equals(result[1])) {
+                countTruAnswer++;
+            }
 
-        if (!update.hasMessage()) {
-            logger.error("У Update нет тела!");
-            throw new IllegalStateException("У Update нет тела!");
+            String chatId = String.valueOf(update.getCallbackQuery().getMessage().getChatId());
+
+            if (countAll == Bot.getDictionaries().size()) {
+                SendMessage message = new SendMessage();
+                message.enableMarkdown(true);
+                message.setChatId(chatId);
+                message.setText("Правильных ответов: " + countTruAnswer + " из " + Bot.getDictionaries().size() + " вопросов.");
+                try {
+                    execute(message);
+                } catch (TelegramApiException e) {
+                    throw new RuntimeException(e);
+                }
+                countAll = 0;
+                countTruAnswer = 0;
+            } else {
+                Integer messageId = update.getCallbackQuery().getMessage().getMessageId();
+                DeleteMessage deleteMessage = new DeleteMessage(chatId, messageId);
+                try {
+                    execute(deleteMessage);
+                } catch (TelegramApiException tae) {
+                    throw new RuntimeException(tae);
+                }
+            }
+
+
+        } else {
+            logger.error("Что то пошло не по плану!");
+            throw new IllegalStateException("Что то пошло не по плану!");
         }
-
-        Message msg = update.getMessage();
-        Long chatId = msg.getChatId();
-        String userName = Utils.getUserName(msg);
-
-        String answer = nonCommand.nonCommandExecute(chatId, userName, msg.getText());
-        setAnswer(chatId, userName, answer);
     }
 
     /**
