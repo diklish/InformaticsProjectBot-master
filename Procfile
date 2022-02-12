@@ -1,1 +1,1 @@
-java -jar target/informaticsproject.jar
+java --version
