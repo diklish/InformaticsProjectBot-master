@@ -1,1 +1,1 @@
- worker: java -version
+ worker: ls
