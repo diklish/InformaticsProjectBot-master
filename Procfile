@@ -1,1 +1,1 @@
- worker: ls
+ worker: ls target
