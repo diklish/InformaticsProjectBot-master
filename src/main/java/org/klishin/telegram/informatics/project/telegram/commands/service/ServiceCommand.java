@@ -75,7 +75,8 @@ abstract class ServiceCommand extends BotCommand {
                         " /allword - Вывод всех слов с переводом;\n" +
                         " /englishword - Вывод всех английских слов;\n" +
                         " /russianword - Вывод всех руских слов;\n" +
-                        " /test - Старт теста;\n" +
+                        " /testen - Старт теста (en->ru);\n" +
+                        " /testru - Старт теста (ru-en);\n" +
                         "/help - помощь\n\n" +
                         "\n";
                 break;
@@ -92,7 +93,10 @@ abstract class ServiceCommand extends BotCommand {
                     msg+=dictionary.getRussian()+"\n";
                 }
                 break;
-            case TEST:
+            case TEST_EN:
+                msg = "Старт теста!";
+                break;
+            case TEST_RU:
                 msg = "Старт теста!";
                 break;
         }

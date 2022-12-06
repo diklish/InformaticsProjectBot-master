@@ -59,8 +59,11 @@ public final class Bot extends TelegramLongPollingCommandBot {
         register(new RussianWordCommand("russianword", "Вывод всех русских"));
         logger.debug("Команда russianword создана");
 
-        register(new TestCommand("test", "Старт теста"));
-        logger.debug("Команда test создана");
+        register(new TestENCommand("testen", "Старт теста (en->ru)"));
+        logger.debug("Команда testen создана");
+
+        register(new TestRUCommand("testru", "Старт теста (ru->en)"));
+        logger.debug("Команда testru создана");
 
         register(new HelpCommand("help", "Помощь"));
         logger.debug("Команда help создана");
